@@ -17,6 +17,8 @@ defmodule GreeterWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    get "/welcome/:name", WelcomeController, :index
   end
 
   # Other scopes may use custom stacks.
