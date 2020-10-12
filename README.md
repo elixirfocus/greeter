@@ -1,6 +1,6 @@
 # Greeter
 
-Greeter is a hello world style app to help introduce the core concepts of the [Phoenix Framework](https://www.phoenixframework.org/) written in [Elixir](https://elixir-lang.org/).
+Greeter is a hello world style example app to help introduce the core concepts of the [Phoenix Framework](https://www.phoenixframework.org/) written in [Elixir](https://elixir-lang.org/).
 
 Built using Elixir 1.11 and Phoenix 1.5.5.
 
