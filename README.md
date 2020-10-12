@@ -4,7 +4,9 @@ Greeter is a hello world style example app to help introduce the core concepts o
 
 Built using Elixir 1.11 and Phoenix 1.5.5.
 
-Audience: This tutorial assumes no previous Elixir experience.
+## Audience and Expectations
+
+This tutorial assumes no previous Elixir experience.
 
 END IMAGE
 
