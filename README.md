@@ -8,8 +8,9 @@ Audience: This tutorial assumes no previous Elixir experience.
 
 END IMAGE
 
-TODO:
-- [] Be consistent with "directory" or "folder"
+## TODO:
+
+- [ ] Add images. 
 
 ## Episode Notes
 
@@ -175,7 +176,7 @@ There are two other concepts we should explore before finishing up. First is ove
 
 ### Adding Business Domain Code
 
-As you may have noticed, the generated Phoenix project has some opinions about folder structure. So far we've been working in `greeter_web` directory but in a larger app you'll have also have lots of business domain code. A good place for that is the `greeter` directory right next to `greeter_web`. Since this app is pretty basic we'll keep the business domain stuff pretty simple and create a formatter module to make names look nicer. It's not much but it will help demo how code can be separated.
+As you may have noticed, the generated Phoenix project has some opinions about directory structure. So far we've been working in `greeter_web` directory but in a larger app you'll have also have lots of business domain code. A good place for that is the `greeter` directory right next to `greeter_web`. Since this app is pretty basic we'll keep the business domain stuff pretty simple and create a formatter module to make names look nicer. It's not much but it will help demo how code can be separated.
 
 Create a new `NameFormatter` module with a simple `format` function that will capitalize our names.
 
