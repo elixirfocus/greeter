@@ -6,11 +6,9 @@ Built using Elixir 1.11.1 and Phoenix 1.5.6.
 
 This tutorial assumes no previous Elixir experience. In fact the first section will help you install and setup Elixir and Phoenix.
 
+By the end of this example, you'll have created a Phoenix app that can display a custom greeting message with a formatted name.
+
 ![Final page with capitalized name greeting: Welcome, Amy!](docs/welcome-amy-formatted.png)
-
-## TODO:
-
-- [ ] Add images. 
 
 ## Example Notes
 
