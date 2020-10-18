@@ -35,17 +35,17 @@ To get Phoenix running we'll need a few more things. The following is a terse li
 
 To create and manage new Elixir projects you'll use a command line tool called `mix`. Mix is a build tool that ships with Elixir and provides tasks for creating, compiling, and testing your application. 
 
-Mix itself works closely with the Hex package manager as a source for your project dependencies. You can install or verify that hex is setup with:
+Mix itself works closely with the [Hex package manager](https://hex.pm/) as a source for your project dependencies. You can install or verify that hex is setup with:
 
     $ mix local.hex
 
 ### Install Node.js
 
-Being a web application, your Phoenix app will need to publish assets including CSS and JavaScript files. To help deploy these assets, Phoenix will lean on Node.js tooling. You'll need to make sure `node` is available. Like before, on macOS using Homebrew this could be as simple as:
+Being a web application, your Phoenix app will need to publish assets including CSS and JavaScript files. To help deploy these assets, Phoenix will lean on Node.js tooling. You'll need to make sure `node` is available. On macOS using Homebrew this could be as simple as:
 
     $ brew install node
 
-Test availability with:
+Test `npm` and `node` and availability with:
 
     $ npm -v
     6.14.8
@@ -186,13 +186,13 @@ Now it's starting to come together!
 > end
 > ```
 >
-> This style uses [Pattern Matching](https://elixir-lang.org/getting-started/pattern-matching.html). Pattern Matching is a core Elixir pattern and is beyond the scope of this hello world example but something you'll want to get more familar with as you get more comfortable with Elixir.
+> This style uses [Pattern Matching](https://elixir-lang.org/getting-started/pattern-matching.html). Pattern Matching is a core Elixir language behavior and is beyond the scope of this hello world example but something you'll want to get more familiar with as you get more comfortable with Elixir.
 
 There are two other concepts we want to explore before finishing up. First is overall code structure and organization and the second is some basic testing.
 
 ### Adding Business Domain Code
 
-The generated Phoenix project has a specific directory structure to help you organize your code and make things work cleanly with some sane defaults. So far we've been working in `greeter_web` directory but in a larger app you'll have also have lots of business domain code. A good place for that is the `greeter` directory right next to `greeter_web`. Since this app is pretty basic we'll keep the business domain stuff pretty simple. We'll create a formatter module to make names look nicer. It's not much but it will help demo how code can be separated.
+Each generated Phoenix project has a specific directory structure to help you organize your code and make things work cleanly with some sane defaults. So far we've been working in `greeter_web` directory but in a larger app you'll have also have lots of business domain code. A good place for that is the `greeter` directory right next to `greeter_web`. Since this app is pretty basic we'll keep the business domain stuff pretty simple. We'll create a formatter module to make names look nicer. It's not much but it will help demo how code can be separated.
 
 Create a new `NameFormatter` module with a simple `format` function that will capitalize our names.
 
