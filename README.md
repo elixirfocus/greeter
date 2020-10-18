@@ -2,7 +2,7 @@
 
 Greeter is a hello world style example app to help introduce the core concepts of the [Phoenix Framework](https://www.phoenixframework.org/) written in [Elixir](https://elixir-lang.org/).
 
-Built using Elixir 1.11 and Phoenix 1.5.5.
+Built using Elixir 1.11 and Phoenix 1.5.6.
 
 ## Audience and Expectations
 
@@ -44,7 +44,7 @@ Mix itself works closely with the Hex package manager as a source for your proje
 
 With Elixir, Mix and Hex all setup you are now ready to install the Phoenix application generator:
 
-    $ mix archive.install hex phx_new 1.5.5
+    $ mix archive.install hex phx_new 1.5.6
 
 ### Install Node.js
 
