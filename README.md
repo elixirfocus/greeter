@@ -8,11 +8,11 @@ By the end of this example, you'll have created a Phoenix app that can display a
 
 ![Final page with capitalized name greeting: Welcome, Amy!](docs/welcome-amy-formatted.png)
 
-Built using Elixir 1.11.1 and Phoenix 1.5.6.
+Built using Elixir 1.12.3 and Phoenix 1.6.
 
 ## Example Notes
 
-Since this is a hello world style app we'll quickly review some Elixir/Phoenix install and setup basics.
+Since this is a hello world style app we will quickly review some Elixir/Phoenix install and setup basics.
 
 ### Install Elixir
 
@@ -25,9 +25,9 @@ See the Elixir website for more [installation options](https://elixir-lang.org/i
 You can check your currently installed version of Elixir with: 
 
     $ elixir -v
-    Erlang/OTP 23 [erts-11.1.1] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [hipe] [dtrace]
-
-    Elixir 1.11.1 (compiled with Erlang/OTP 23)
+	Erlang/OTP 24 [erts-12.0.4] [source] [64-bit] [smp:16:16] [ds:16:16:10] [async-threads:1] [jit]
+	
+	Elixir 1.12.3 (compiled with Erlang/OTP 24)
 
 To get Phoenix running we'll need a few more things. The following is a terse list of a typical installation. For a more detailed walkthrough, see the official [Phoenix Installation](https://hexdocs.pm/phoenix/installation.html) guide. 
 
@@ -39,21 +39,6 @@ Mix itself works closely with the [Hex package manager](https://hex.pm/) as a so
 
     $ mix local.hex
 
-### Install Node.js
-
-Being a web application, your Phoenix app will need to publish assets including CSS and JavaScript files. To help deploy these assets, Phoenix will lean on Node.js tooling. You'll need to make sure `node` is available. On macOS using Homebrew this could be as simple as:
-
-    $ brew install node
-
-Test `npm` and `node` and availability with:
-
-    $ npm -v
-    6.14.8
-    $ node --version
-    v14.4.0
-
-For more Node.js installation options, see [their website](https://nodejs.org/en/download/).
-
 ### No PostgreSQL Install
 
 Many of the Elixir Phoenix apps you'll encounter utilize [PostgreSQL](https://www.postgresql.org/) for storage and so *eventually* you'll want to have it installed. However, to keep things simple, this example will avoid database use and no PostgreSQL installation is necessary.
@@ -62,7 +47,7 @@ Many of the Elixir Phoenix apps you'll encounter utilize [PostgreSQL](https://ww
 
 You are now ready to install the Phoenix application generator:
 
-    $ mix archive.install hex phx_new 1.5.6
+    $ mix archive.install hex phx_new 1.6.0
 
 Since we are not going to use any database storage we will include a flag to skip that dependency in the generated project. For more Phoenix project generator flag options see [the docs](https://hexdocs.pm/phoenix/Mix.Tasks.Phx.New.html).
 
@@ -87,9 +72,9 @@ The goal of this project is to add a new welcome page and have that page display
 
 This error page is basically Phoenix saying it does not know how to answer that URL request. It tries to be helpful and displays the requests (aka the routes) that it does know about, and as expected our `welcome` URL is not one of them. 
 
-> This kind of helpful error page is only something that will be shown in local development. It's the result of `debug_errors` being set to `true` inside of `config/dev.exs`. If you toggle that value to `false` and restart the server you can see the much more tame default production experience for 404.
+> This kind of helpful error page is only something that will be shown in local development. It is the result of `debug_errors` being set to `true` inside of `config/dev.exs`. If you toggle that value to `false` and restart the server you can see the much more tame default production experience for 404.
 
-To add a new route you'll want to edit the `routes.ex` file located at: `lib/greeter_web/routes.ex`. Open the routes file and add a new `welcome` route.
+To add a new route you'll want to edit the `router.ex` file located at: `lib/greeter_web/router.ex`. Open the routes file and add a new `welcome` route.
 
 #### Listing 1: Adding a new welcome route that also captures a name. (`router.ex`)
 
@@ -131,22 +116,22 @@ defmodule GreeterWeb.WelcomeView do
 end
 ```
 
-### Listing 4: Create an `index` page template. (`index.html.eex`)
+### Listing 4: Create an `index` page template. (`index.html.heex`)
 
 ```html
-<!-- lib/greeter_web/templates/welcome/index.html.eex -->
+<!-- lib/greeter_web/templates/welcome/index.html.heex -->
 <h1>Welcome!</h1>
 ```
 
-The Phoenix app should detect the changes to the router and the other new files, but if you run into trouble stop the server and the restart it with `mix phx.server`.
+The Phoenix app should detect the changes to the router and the other new files, but if you run into trouble stop the server with `CTRL+C` twice in terminal and then reissue the start server command with `mix phx.server`.
 
-Now, when you load <http://localhost:4000/welcome/amy> you should see the new page with a welcome header. The header still lacks our name, but progress!
+Now, when you load <http://localhost:4000/welcome/amy> you should see the new page with a welcome header. The header still lacks our name, but we are making progress!
 
 !["Static welcome message."](docs/welcome.png)
 
-You may have noticed the `_params` in that index function. This second argument of the `index` function is what would normally hold the parameters of the request but since those values were not used in our first iteration we prefixed it with an underscore as a way of telling Elixir we are not using this right now. We could have also used an underscore by itself, but prefixing a more meaningful term can usually help code readability and later editing.
+You may have noticed the `_params` in that index function. This second argument of the `index` function is what holds the parameters of the request but since those values were not used in our first iteration we prefixed it with an underscore as a way of telling Elixir we are not using this right variable now. We could have also used an underscore by itself, but prefixing with a more meaningful term can usually help code readability and later editing.
 
-Now that we do want to use the params remove the underscore. The type of `params` is actually an [Elixir Map](https://hexdocs.pm/elixir/Map.html) and so we can use some bracket syntax to get at the name value within. Bind a local variable `name` to the name in the params map. Then update the `render` call such that we are passing the name value.
+Now that we want to use the params lets remove the underscore. The type of `params` is actually an [Elixir Map](https://hexdocs.pm/elixir/Map.html) and so we can use some bracket syntax to get at the name value within. Bind a local variable `name` to the name in the params map. Then update the `render` call such that we are passing the name value.
 
 ### Listing 5: Get the name value our of params. (`welcome_controller.ex`)
 
@@ -162,14 +147,14 @@ Now that we do want to use the params remove the underscore. The type of `params
 
 Now that render is being told what the `name` is we can update the template to display it. Update the welcome header to include the name:
 
-### Listing 6: Add `name` to the template. (`index.html.eex`)
+### Listing 6: Add `name` to the template. (`index.html.heex`)
 
 ```diff
 - <h1>Welcome!</h1>
 + <h1>Welcome, <%= @name %>!</h1>
 ```
 
-This `<% ... %>` syntax is called [Embedded Elixir](https://hexdocs.pm/eex/EEx.html) and is what we use to make templates dynamic in Phoenix.
+This `<%= ... %>` syntax is called [Embedded Elixir](https://hexdocs.pm/eex/EEx.html) and Phoenix uses a additive version `heex` which stands for HTML + EEx. and is what we use to make templates dynamic in Phoenix.
 
 Try loading the test url again: <http://localhost:4000/welcome/amy>
 
@@ -188,11 +173,11 @@ Now it's starting to come together!
 >
 > This style uses [Pattern Matching](https://elixir-lang.org/getting-started/pattern-matching.html). Pattern Matching is a core Elixir language behavior and is beyond the scope of this hello world example but something you'll want to get more familiar with as you get more comfortable with Elixir.
 
-There are two other concepts we want to explore before finishing up. First is overall code structure and organization and the second is some basic testing.
+There are two other concepts we want to explore before finishing up. First is overall code organization and the second is some basic testing.
 
 ### Adding Business Domain Code
 
-Each generated Phoenix project has a specific directory structure to help you organize your code and make things work cleanly with some sane defaults. So far we've been working in `greeter_web` directory but in a larger app you'll have also have lots of business domain code. A good place for that is the `greeter` directory right next to `greeter_web`. Since this app is pretty basic we'll keep the business domain stuff pretty simple. We'll create a formatter module to make names look nicer. It's not much but it will help demo how code can be separated.
+Each generated Phoenix project has a specific directory structure to help you organize your code and separate responsibilities. So far we've been working in `greeter_web` directory but in a larger app you'll have also have lots of business domain code. A good place for that is the `greeter` directory right next to `greeter_web`. Since this app is pretty basic we'll keep the business domain stuff pretty simple. We'll create a formatter module to make names look nicer. It is not much but it will help demo how code can be separated.
 
 Create a new `NameFormatter` module with a simple `format` function that will capitalize our names.
 
@@ -210,12 +195,12 @@ end
 Before we get to integrating this new formatter, let's add some tests to verify our expectations. One of the `mix` tasks is to run all of our project's tests, and the default Phoenix project generator made a few for you. 
 
     $ mix test
-    .....
-    
-    Finished in 0.1 seconds
-    5 tests, 0 failures
+    ...
 
-Let's add a new test file for our `NameFormatter`. Generally it is a good idea to mirror each major type in the app with a similarly named test file. Under the `test` directory at the root of your project, find the `greeter` directory and then make a test file for the `NameFormatter` module: 
+    Finished in 0.1 seconds (0.07s async, 0.05s sync)
+    3 tests, 0 failures
+
+Let's add a new test file for our `NameFormatter`. Under the `test` directory at the root of your project, create the `greeter` directory and then make a test file for the `NameFormatter` module: 
 
 ### Listing 8: Create a `NameFormatterTest` file. (`name_formatter_test.exs`)
 
@@ -298,14 +283,15 @@ You've accomplished a lot of great things today, including:
 * Building out some simple business domain behavior.
 * Verifying your work through tests!
 
-For more helpful resources learning Elixir check out the language website:
+For more helpful resources learning Elixir check out:
 
-<https://elixir-lang.org/learning.html>
+* <https://elixir-lang.org/learning.html>
+* <https://elixirschool.com>
 
 For more helpful resources learning Phoenix check out the links here:
 
 <https://hexdocs.pm/phoenix/community.html>
 
-If you have any feedback on this tutorial or want to see more, please reach out to: <mike@mikezornek.com>.
+If you have any feedback on this tutorial or want to see more, please reach out to: <zorn@elixirfocus.com>.
 
 Thanks for your interest and best of luck learning Phoenix!

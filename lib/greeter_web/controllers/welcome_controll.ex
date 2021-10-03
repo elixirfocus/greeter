@@ -6,5 +6,4 @@ defmodule GreeterWeb.WelcomeController do
     formatted_name = Greeter.NameFormatter.format(name)
     render(conn, "index.html", name: formatted_name)
   end
-
 end

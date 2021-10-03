@@ -7,12 +7,8 @@ defmodule GreeterWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_greeter_key",
-    signing_salt: "AuT87tku"
+    signing_salt: "FM9qJsNZ"
   ]
-
-  socket "/socket", GreeterWeb.UserSocket,
-    websocket: true,
-    longpoll: false
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
@@ -24,7 +20,7 @@ defmodule GreeterWeb.Endpoint do
     at: "/",
     from: :greeter,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(assets fonts images favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
